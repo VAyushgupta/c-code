@@ -1,0 +1,806 @@
+#include <stdio.h>
+#include <stdlib.h>
+struct Node{
+    int data;
+    struct Node* next;
+};
+struct Node* head;
+void insert(int x){
+    struct Node* temp;
+    temp = ( struct Node*)malloc(sizeof(struct Node));
+    temp->data=x;
+    temp->next=head;
+    head=temp;
+}
+void Print(){
+    struct Node* temp=head;
+    printf("the list is ");
+    while(temp!=NULL){
+        printf("%d",temp->data);
+        temp=temp->next;
+        printf("\n");
+    }
+    
+}
+int main(){
+    head=NULL;
+    int n,i,x;
+    printf("how many numbers");
+    scanf("%d",&n);
+    for(i=0;i<n;i++){
+        printf("enter the value of \n");
+        scanf("%d",&x);
+        insert(x);
+        Print();
+    }
+    return 0;
+}
+
+// Online C compiler to run C program online
+#include <stdio.h>
+#include <stdlib.h>
+struct node{
+    int data;
+    struct node* next;
+};
+struct node* head;
+void Insert(int data,int n){
+    struct node* newnode=(struct node*)malloc(sizeof(struct node));
+    newnode->data=data;
+    newnode->next=head;
+    if(n==1){
+        newnode->next=head;
+        head=newnode;
+        return;
+    }
+    struct node* temp=head;
+    for(int i=0;i<n-2;i++){
+        temp=temp->next;
+    }
+    newnode->next=temp->next;
+    temp->next=newnode;
+}
+void Print(){
+    struct node* temp=head;
+    while(temp!=NULL){
+        printf("%d",temp->data);
+        temp=temp->next;
+        
+    }printf("\n");
+}
+/*void Delete(int n){
+    struct node* oldnode=head;
+    if(n==1){
+        head=oldnode->next;//oldnode means n-1 node
+        return;
+    }
+    int i;
+    for(i=0;i<n-2;i++){
+        oldnode=oldnode->next;
+    }
+    struct node* temp=oldnode->next;
+    oldnode->next=temp->next;
+}*/
+struct node* reverse(struct node* head){
+    struct node* current,*next,*prevs;
+    while(current!=NULL){
+        next=current->next;
+        current->next=prevs;
+        prevs=current;
+        current=next;
+    }
+    head=prevs;
+    return head;
+}
+int main(){
+ struct node* head=NULL;
+ Insert(2,1);
+ Insert(3,2);
+ Insert(4,1);
+ Insert(5,1);
+ Print();
+ int n;
+ printf("please enter the node");
+ scanf("%d",&n);
+// Delete(n);
+ Print();
+ reverse(head);
+ Print(head);
+ return 0;
+}
+#include<stdlib.h>
+#include<stdio.h>
+struct node{
+    int data;
+    struct node* next;
+};
+struct node* head;
+    
+struct node* Insert(struct node* head,int data){
+    struct node* temp=(struct node*)malloc(sizeof(struct node));
+    temp->data=data;
+    temp->next=NULL;
+    if(head==NULL){
+        head=temp;
+    }
+    else{
+        struct node *temp1=head;
+        while(temp1->next!=NULL){
+            temp1=temp1->next;}
+            temp1->next=temp;
+        
+    }
+    return head;
+}
+void Print(struct node* p){
+    if(p==NULL)return;
+    Print(p->next);
+    printf("%d",p->data);
+    
+}
+void Reverse(struct node* p){
+    if(p==NULL){
+        head=p;
+        return;
+    }
+    Reverse(p->next);
+    struct node*q;
+        q=p->next;
+    q->next=p;
+    p->next=NULL;
+    
+}
+
+int main(){
+    struct node* head=NULL;
+    head=Insert(head,2);
+    head=Insert(head,3);
+    head=Insert(head,4);
+    head=Insert(head,5);
+    Print(head);
+    Reverse(head);
+    Print(head);
+    return 0;
+}
+
+#include <stdio.h>
+#include<stdlib.h>
+struct node* head=NULL;
+struct node{
+    int data;
+    struct node *prev;
+    struct node* next;
+};
+struct node* getnewnode(int x){
+    struct node* newnode=(struct node*)malloc(sizeof(struct node));
+    newnode->data=x;
+    newnode->prev=NULL;
+    newnode->next=NULL;
+    return newnode;
+}
+void Insertathead(int x){
+    struct node* newnode=getnewnode(x);
+    if(head==NULL){
+        head=newnode;
+        return;
+    }
+    head->prev=newnode;
+    newnode->next=head;
+    head=newnode;
+}
+void Print(){
+    struct node* temp=head;
+    printf("forward:");
+    while(temp!=NULL)
+    {
+        printf("%d",temp->data);
+        temp=temp->next;
+    }
+    printf("\n");
+}
+void Reverseprint(){
+    struct node* temp=head;
+    if(temp==NULL){
+        return;
+    }
+    while(temp->next!=NULL){
+        temp=temp->next;
+    }
+    printf("reverse");
+    while(temp!=NULL){
+        printf("%d",temp->data);
+        temp=temp->prev;
+    }
+    printf("\n");
+}
+
+int main() {
+    struct node* head=NULL;
+    Insertathead(2);
+    Print();
+    Reverseprint();
+    Insertathead(4);
+    Print();
+    Reverseprint();
+      Insertathead(6);
+    Print();
+    Reverseprint();
+
+    return 0;
+}
+
+
+#include <stdio.h>
+#define max_size 101
+int arr[max_size];
+int top=-1;
+void push(int x){
+    if(top==max_size-1){
+        printf("error:stack overflow");
+        return;
+    }
+    arr[++top]=x;
+}
+void pop(){
+    if(top==-1){
+        printf("stack is empty");
+        return;
+    }
+    top--;
+}
+int Top(){
+    return arr[top];
+}
+void Print(){
+    int i;
+    printf("stack");
+    for(i=0;i<=top;i++){
+        printf("%d",arr[i]);
+        printf("\n");
+    }
+    
+}
+int main() {
+    push(2);
+    push(5);
+    push(10);
+    pop();
+    push(12);
+    Print();
+    return 0;
+}
+
+
+#include <stdio.h>
+#include <stdlib.h>
+struct node{
+    int data;
+    struct node* link;
+};
+struct node* top=NULL;
+void push(int x){
+    struct node* temp=(struct node*)malloc(sizeof(struct node));
+    temp->data=x;
+    temp->link=top;
+    top=temp;
+}
+void pop(){
+    struct node* temp;
+    if(top==NULL){
+        return;
+    }
+    temp=top;
+    top=top->link;
+    free(temp);
+}
+int main() {
+    
+
+    return 0;
+}
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#define size 5
+int item[size],rear=-1,front=-1;
+void enqueue(int value){
+    if(rear==size-1){
+        printf("queue is full");
+    }else{
+        if(front==-1){
+            front=0;
+        }
+        rear++;
+        item[rear]=value;
+        printf("Insert %d",item[rear]);
+    }
+}
+void dequeue(){
+    if(front=-1){
+        printf("queue is empty");
+    }else{
+        printf("deleted %d",item[front]);
+        front++;
+        if(front>rear){
+            front=rear=-1;
+        }
+    }
+}
+
+void display(){
+    if(rear==-1){
+        printf("queue is empty ");
+    }else{
+        int i;
+        printf("the element in the queue is");
+        for(i=front;i<=rear;i++){
+            printf("%d",item[i]);
+        }
+        printf("\n");
+    }
+}
+int main() {
+    dequeue();
+
+ 
+  enqueue(1);
+  enqueue(2);
+  enqueue(3);
+  enqueue(4);
+  enqueue(5);
+  enqueue(6);
+  display();
+  dequeue();
+
+  
+  display();
+
+  return 0;
+}
+
+#include <stdio.h>
+#include<stdlib.h>
+struct node{
+    struct node* next;
+    int data;
+};
+struct node* front;
+struct node* rear;
+void Insertnode(struct node* ptr,int item){
+    ptr=(struct node*)malloc(sizeof(struct node));
+    if(ptr==NULL){
+        printf("\noverflow\n");
+        return;
+    }else{
+        ptr->data=item;
+        if(front==NULL){
+            front=ptr;
+            rear=ptr;
+            front->next=NULL;
+            rear->next=NULL;
+        }else{
+            rear->next=ptr;
+            rear=ptr;
+            rear->next=NULL;
+        }
+    }
+}
+void deletenode(struct node* ptr){
+    if(front==NULL){
+        printf("Underflow");
+        return;
+    }else{
+        ptr=front;
+        front=front->next;
+        free(ptr);
+    }
+}
+int main() {
+   struct node* head=NULL;
+   Insertnode(head,10);
+   Insertnode(head,20);
+   printf("%d",front->data);
+   deletenode(head);
+   printf("%d",front->data);
+
+    return 0;
+}
+#include <stdio.h>
+#include<stdlib.h>
+#include<stdbool.h>
+struct node{
+    int data;
+    struct node* left;
+    struct node* right;
+};
+struct node* getnewnode(int data){
+    struct node* newnode=(struct node*)malloc(sizeof(struct node));
+    newnode->data=data;
+    newnode->left=NULL;
+    newnode->right=NULL;
+    return newnode;
+}
+struct node* Insert(struct node* root,int data){
+    if(root==NULL){
+        root=getnewnode(data);
+    }else if(data < root->data){
+        root->left=Insert(root->left,data);
+    }else{
+        root->right=Insert(root->right,data);
+    }
+    return root;
+}
+bool search(struct node* root,int data){
+    if(root==NULL){
+        return false;
+    }
+    else if(root->data==data){
+        return true;
+    }else if(data<root->data)return search(root->left,data);
+    else return search(root->right,data);
+}
+int main() {
+    struct node* head=NULL;
+    head=Insert(head,15);
+    head=Insert(head,10);
+    head=Insert(head,20);
+    head=Insert(head,25);
+    head=Insert(head,8);
+    head=Insert(head,12);
+    int number;
+    printf("please enter the number to search");
+    scanf("%d",&number);
+    if(search(head,number)==true){
+        printf("found! enjoy");
+    }else{
+        printf("notfound please enter next time");
+    }
+    return 0;
+}
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+struct node{
+    int data;
+    struct node* right;
+    struct node* left;
+};
+
+ struct node* getnewnode(int data){
+     struct node* newnode=(struct node*)malloc(sizeof(struct node));
+     newnode->data=data;
+     newnode->right=NULL;
+     newnode->left=NULL;
+     return newnode;
+ }  
+ 
+ struct node* Insert(struct node* root,int data){
+     if(root==NULL){
+         root=getnewnode(data);
+     }else if(data<=root->data){
+         root->left=Insert(root->left,data);
+     }else{
+         root->right=Insert(root->right,data);
+     }
+     return root;
+ }
+    bool search(struct node* root,int data){
+     if(root==NULL){
+         return false;
+     }else if(data==root->data)return true;
+     else if(data<=root->data)return search(root->left,data);
+     else{
+        return search(root->right,data);
+     }
+ }
+ int findMinimum(struct node* root){
+     if(root==NULL){
+         printf("error:Tree is empty");
+         return -1;
+     }
+     struct node* current=root;
+     while(current->left!=NULL){
+         current=current->left;
+     }
+     return current->data;
+ }
+ 
+int main(){
+    struct node* root=NULL;
+    root=Insert(root,15);
+    root=Insert(root,10);
+    root=Insert(root,20);
+    root=Insert(root,25);
+    root=Insert(root,8);
+    root=Insert(root,12);
+    int number;
+    printf("please enter the number you need to find");
+    scanf("%d",&number);
+    if(search(root,number)==true){
+        printf("number is found");
+    }else{
+        printf("number not found");
+    }
+    int p=findMinimum(root);
+    printf("%d",p);
+    return 0;
+}
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+struct node{
+    int data;
+    struct node* right;
+    struct node* left;
+};
+
+ struct node* getnewnode(int data){
+     struct node* newnode=(struct node*)malloc(sizeof(struct node));
+     newnode->data=data;
+     newnode->right=NULL;
+     newnode->left=NULL;
+     return newnode;
+ }  
+ 
+ struct node* Insert(struct node* root,int data){
+     if(root==NULL){
+         root=getnewnode(data);
+     }else if(data<=root->data){
+         root->left=Insert(root->left,data);
+     }else{
+         root->right=Insert(root->right,data);
+     }
+     return root;
+ }
+    bool search(struct node* root,int data){
+     if(root==NULL){
+         return false;
+     }else if(data==root->data)return true;
+     else if(data<=root->data)return search(root->left,data);
+     else{
+        return search(root->right,data);
+     }
+ }
+ int findMinimum(struct node* root){
+     if(root==NULL){
+         printf("error:Tree is empty");
+         return -1;
+     }
+     struct node* current=root;
+     while(current->left!=NULL){
+         current=current->left;
+     }
+     return current->data;
+ }
+ int treeheight(struct node* root){
+     if(root==NULL){
+         return 0;
+     }else{
+        int leftheight=treeheight(root->left);
+        int rightheight=treeheight(root->right);
+        if(leftheight>=rightheight){
+            return leftheight+1;
+        }else{
+            return rightheight+1;
+        }
+     }
+ }
+int main(){
+    struct node* root=NULL;
+    root=Insert(root,15);
+    root=Insert(root,10);
+    root=Insert(root,20);
+    root=Insert(root,25);
+    root=Insert(root,8);
+    root=Insert(root,12);
+    int number;
+    printf("please enter the number you need to find");
+    scanf("%d",&number);
+    if(search(root,number)==true){
+        printf("number is found\n");
+    }else{
+        printf("number not found\n");
+    }
+    int p=findMinimum(root);
+    printf("%d\n",p);
+    int height=treeheight(root);
+    printf("%d is the height of the tree",height);
+    return 0;
+}
+
+#include <stdio.h>
+#include<stdlib.h>
+struct node{
+    int data;
+    struct node* left;
+    struct node* right;
+};
+struct node* newnode(int data){
+    struct node* newnode=(struct node*)malloc(sizeof(struct node));
+    newnode->data=data;
+    newnode->left=NULL;
+    newnode->right=NULL;
+    
+    return newnode;
+}
+int height(struct node* node){
+    if(node==NULL){
+        return 0;
+    }else{
+        int heightleft=height(node->left);
+        int heightright=height(node->right);
+        if(heightleft>heightright){
+            return heightleft+1;
+        }else{
+            return heightright+1;
+        }
+    }
+}
+void currentlevel(struct node* root,int level){
+    if(root==NULL)return ;
+    if(level==1){
+        printf("%d",root->data);
+    }else{
+        currentlevel(root->left,level-1);
+        currentlevel(root->right,level-1);
+    }
+}
+void levelorder(struct node* root){
+    int h=height(root);
+    int i;
+    for(i=0;i<h;i++){
+        currentlevel(root,i);
+    }
+}
+int main() {
+  struct node* root=newnode(1);
+  root->left=newnode(2);
+  root->right=newnode(3);
+  root->left->left=newnode(4);
+  root->right->right=newnode(5);
+  levelorder(root);
+    return 0;
+}
+
+#include <stdio.h>
+#include<stdlib.h>
+#include<stdbool.h>
+struct node{
+    int data;
+    struct node* left;
+    struct node* right;
+};
+struct node* newnode(int data){
+    struct node* newnode=(struct node*)malloc(sizeof(struct node));
+    new-node->data=data;
+    newnode->left=NULL;
+    newnode->right=NULL;
+    
+    return newnode;
+}
+int height(struct node* node){
+    if(node==NULL){
+        return 0;
+    }else{
+        int heightleft=height(node->left);
+        int heightright=height(node->right);
+        if(heightleft>heightright){
+            return heightleft+1;
+        }else{
+            return heightright+1;
+        }
+    }
+}
+void currentlevel(struct node* root,int level){
+    if(root==NULL)return ;
+    if(level==1){
+        printf("%d",root->data);
+    }else{
+        currentlevel(root->left,level-1);
+        currentlevel(root->right,level-1);
+    }
+}
+void levelorder(struct node* root){
+    int h=height(root);
+    int i;
+    for(i=0;i<h;i++){
+        currentlevel(root,i);
+    }
+}
+void preorder(struct node* root){
+    if(root==NULL){
+        return;
+    }
+    printf("%d\n",root->data);
+    preorder(root->left);
+    preorder(root->right);
+    
+}
+void inorder(struct node* root){
+    if(root==NULL){
+        return;
+    }
+    inorder(root->left);
+    printf("%d\n",root->data);
+    inorder(root->right);
+}
+void postorder(struct node* root){
+    if(root==NULL)return;
+    postorder(root->left);
+    postorder(root->right);
+    printf("%d\n",root->data);
+}
+/*bool  Issubtreelesser(struct node* root,int value){
+    if(root==NULL)return;
+    if(root->data<value&&Issubtreelesser(root->left,value)&&Issubtreelesser(root->right,value)){
+        return true;
+    }else{
+        return false;
+    }
+}*/
+bool Issubtreegreater(struct node* root,int value){
+    if(root==NULL)return true;
+    if(root->data>value&&Issubtreegreater(root->left,value)&&Issubtreegreater(root->right,value)){
+        return true;
+    }else{
+        return false;
+    }
+}
+bool Issubtreelesser(struct node* root,int value){
+    if(root==NULL) return true;
+    if(root->data<value&&Issubtreelesser(root->left,value)&&Issubtreelesser(root->right,value)){
+        return true;
+    }else{
+        return false;
+    }
+}
+bool Isbinarytree(struct node* root){
+    if(root==NULL){
+        return true;
+    }
+    if(Issubtreelesser(root->left,root->data)&&Issubtreegreater(root->right,root->data)&&Isbinarytree(root->left)&&Isbinarytree(root->right)){
+        return true;
+    }else{
+        return false;
+    }
+}
+struct node* delete(struct node* root,int data){
+    if(root==NULL)return ;
+    else if(data<root->data){
+        root->left=delete(root->left ,data);
+    }else if(data>root->data){
+        root->right=delete(root->right,data);
+    }else{
+        if(root->left==NULL&&root->right==NULL){
+            free(root);
+            root=NULL;
+        }else if(root->left==NULL){
+            struct node* temp=root;
+            root=root->left;
+            free(temp);
+        }else if(root->right==NULL){
+            struct node* temp=root;
+            root=root->right;
+            free(temp);
+        }
+    }
+}
+int main() {
+  struct node* root=newnode(1);
+  root->left=newnode(2);
+  root->right=newnode(3);
+  root->left->left=newnode(4);
+  root->right->right=newnode(5);
+  levelorder(root);
+  preorder(root);
+  inorder(root);
+  postorder(root);
+  bool a=Isbinarytree(root);
+  printf("%d",a);
+  delete(root,4);
+  levelorder(root);
+    return 0;
+}
